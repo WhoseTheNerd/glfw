@@ -1,5 +1,5 @@
 project "GLFW"
-    kind "StaticLib"
+    kind "SharedLib"
     language "C"
     staticruntime "on"
 
@@ -18,6 +18,16 @@ project "GLFW"
 		"src/vulkan.c",
 		"src/window.c"
     }
+
+	defines
+	{
+		"_GLFW_BUILD_DLL"
+	}
+
+	postbuildcommands
+	{
+		("{COPY} %{cfg.buildtarget.relpath} \"%{wks.location}/bin/" .. outputdir .. "/Sandbox/\"")
+	}
 
     filter "system:windows"
         systemversion "latest"
