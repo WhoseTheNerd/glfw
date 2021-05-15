@@ -1,7 +1,7 @@
 project "glfw3"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C"
-    staticruntime "off"
+    staticruntime "on"
 
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -18,16 +18,6 @@ project "glfw3"
 		"src/vulkan.c",
 		"src/window.c"
     }
-
-	defines
-	{
-		"_GLFW_BUILD_DLL"
-	}
-
-	postbuildcommands
-	{
-		("{COPY} %{cfg.buildtarget.relpath} \"%{wks.location}/bin/" .. outputdir .. "/Sandbox/\"")
-	}
 
     filter "system:windows"
         systemversion "latest"
